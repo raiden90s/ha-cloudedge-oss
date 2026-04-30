@@ -10,12 +10,12 @@ If you find this library useful, consider supporting its development! Your contr
 @@@@@@@
 
 # Features
-🎥 Camera Integration: Full camera entity support with device information
-📊 Sensor Monitoring: Battery levels, WiFi strength, motion sensitivity, and more
-🔧 Device Control: Switch entities for lights, motion detection, LED status, and notifications
-� Complete Parameter Access: All device parameters exposed as entities (disabled by default)
-�🔄 Auto-refresh: Configurable refresh intervals to keep device status current
-🏠 Multi-home Support: Supports devices across multiple homes/locations
+- 🎥 Camera Integration: Full camera entity support with device information
+- 📊 Sensor Monitoring: Battery levels, WiFi strength, motion sensitivity, and more
+- 🔧 Device Control: Switch entities for lights, motion detection, LED status, and notifications
+- � Complete Parameter Access: All device parameters exposed as entities (disabled by default)
+- �🔄 Auto-refresh: Configurable refresh intervals to keep device status current
+- 🏠 Multi-home Support: Supports devices across multiple homes/locations
 
 # Important note about CloudEdge sessions
 CloudEdge allows only one active session per account. If you log in to this integration using your main account, the CloudEdge app on your phone will be logged out.
@@ -26,6 +26,7 @@ To avoid disruptions, it is recommended to:
   1. Create a second CloudEdge account.
   2. Share access to your homes/devices with this second account.
   3. Use the second account credentials for this integration.
+
 This ensures that your main account remains logged in on your phone while the integration operates independently.
 
 # Installation
@@ -44,28 +45,29 @@ This ensures that your main account remains logged in on your phone while the in
    ```
    custom_components/cloudedge/
    ```
-Restart Home Assistant
-Enable Debug Logging
+3. Restart Home Assistant
+# Enable Debug Logging
 Add this to your configuration.yaml to enable detailed logging:
-
+```yaml
 logger:
   default: warning
   logs:
     custom_components.cloudedge: debug
     cloudedge: debug
+```
 Then restart Home Assistant and check the logs for detailed information.
 
-Automation Examples
+# Automation Examples
 One of the main goals of this integration is making CloudEdge cameras useful inside Home Assistant automations. In a typical setup you will use:
 
-binary_sensor.*_motion entities as triggers
-camera.* entities to attach the latest snapshot to a notification
-switch.*_motion_detection entities to enable or disable motion detection
+- `binary_sensor.*_motion` entities as triggers
+- `camera.* entities` to attach the latest snapshot to a notification
+- `switch.*_motion_detection` entities to enable or disable motion detection
 Replace the example entity IDs and notification service below with your own names from Developer Tools.
 
-Notify when a camera detects motion
+# Notify when a camera detects motion
 This example sends a mobile notification and includes the latest CloudEdge camera snapshot.
-
+```yaml
 alias: CloudEdge alerts
 description: ""
 triggers:
@@ -91,11 +93,12 @@ actions:
         image: "/api/camera_proxy/{{ camera_entity }}"
 
 mode: single
-Away From Home example
+```
+# Away From Home example
 If you use an input_boolean, presence automation, or alarm mode helper, you can arm all cameras at once by enabling motion detection when nobody is home.
 
 The exact switch.*_motion_detection entity IDs may differ depending on your device names, so confirm them in Home Assistant Developer Tools before copying this example.
-
+```yaml
 input_boolean:
   away_from_home:
     name: Away From Home
@@ -129,10 +132,12 @@ automation:
             - switch.garage_motion_detection
             - switch.backyard_motion_detection
     mode: single
-Beta Notice
+```
+## Beta Notice
 This integration is currently in beta. While it provides an interface for interacting with CloudEdge cameras, there are some known and unknown issues that will be addressed in future versions:
 
-Status Reliability: The API always shows the camera as online, which may not reflect the actual status.
-Refresh Reliability: The API refreshes only after some time when the CloudEdge app is not opened on the phone. This does not impact device control.
-Streaming support: Live streaming is not supported yet and will be added in a future version.
+- Status Reliability: The API always shows the camera as online, which may not reflect the actual status.
+- Refresh Reliability: The API refreshes only after some time when the CloudEdge app is not opened on the phone. This does not impact device control.
+- Streaming support: Live streaming is not supported yet and will be added in a future version.
+
 We appreciate your understanding and welcome feedback to improve the integration.
