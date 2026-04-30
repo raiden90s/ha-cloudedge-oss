@@ -1,0 +1,5 @@
+{
+  "name": "CloudEdge OSS Snapshot",
+  "render_readme": true,
+  "homeassistant": "2023.1.0"
+}
