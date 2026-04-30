@@ -7,7 +7,7 @@ An Home Assistant integration for CloudEdge cameras. This integration provides c
 # Support the Project
 If you find this library useful, consider supporting its development! Your contributions help maintain and improve the project.
 
-ko-fi
+@@@@@@@
 
 # Features
 🎥 Camera Integration: Full camera entity support with device information
